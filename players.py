@@ -1,19 +1,49 @@
 #!/usr/bin/python
-import board.py
+# -*- coding: utf-8 -*-
+
+import random
+import board
 
 class Player(object):
-    pass
+    """
+    General Player Class
+    """
 
-class P1(Player):
+    def __init__(self, marker):
+        self.marker = marker
+
+    def move(self, board, cell, marker):
+        board.update_cell(cell, marker)
+
+class Human(Player):
     """
     Human Player Class
     """
-    pass
+    
+    def __init__(self, marker='X'):
+        self.marker = marker
 
-class P2(Player):
+    def get_human_move(self, board):
+        while True:
+            move = raw_input("Input your move in (x,y) coordinates:")
+            try:
+                type(move) == tuple and len(move) == 2
+            except:
+                move = (4, 4)
+
+            if move in board.get_empty_cells():
+                break
+            else:
+                print "That's not a valid move! Try again."
+        return move
+
+class CPU(Player):
     """
     CPU Player Class
     """
+
+    def __init__(self, marker='O'):
+        self.marker = marker
 
     def opposite_marker(self, board, marker):
         if marker == board.p1:
@@ -30,10 +60,11 @@ class P2(Player):
             elif board.winner == board.p2:
                 return 1
         else:
+            possible_moves = board.get_empty_cells()
             best_score = None
-            for cell in board.get_empty_cells():
+            for cell in possible_moves:
                 board.update_cell(cell, board.p2)
-                val = self.minimax(board, opposite_marker(board, marker))
+                val = self.minimax(board, self.opposite_marker(board, marker))
                 board.update_cell(cell, board.blank)
                 if marker == board.p2:
                     if val > best_score:
@@ -43,20 +74,17 @@ class P2(Player):
                         best_score = val
                 return best_score
 
-    def get_best_move(self, board, marker):
+    def get_CPU_move(self, board, marker):
         possible_moves = board.get_empty_cells()
         best_moves = []
         best_score = None
         for cell in possible_moves:
             board.update_cell(cell, marker)
-            val = self.minimax(board, opposite_marker(board, marker))
-            board.update_cell(cell, None)
+            val = self.minimax(board, self.opposite_marker(board, marker))
+            board.update_cell(cell, board.blank)
             if val > best_score:
                 best_score = val
                 best_moves = [cell]
             elif val == best_score:
                 best_moves.append(cell)
         return random.choice(moves)
-
-
-

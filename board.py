@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 class Board(object):
     """
@@ -25,7 +26,7 @@ class Board(object):
     ]
     WINNER = None
 
-    def __init__(self, full=FULL, state=STATE, p1_marker=P1_MARKER, p2_marker=P2_MARKER, blank_marker=BLANK_MARKER, win_combos=WIN_COMBOS, winner=WINNER):
+    def __init__(self, p1_marker=P1_MARKER, p2_marker=P2_MARKER, blank_marker=BLANK_MARKER, win_combos=WIN_COMBOS, winner=WINNER):
         #self.__full = full
         #self.__state = state
         #self.__won = False
@@ -56,6 +57,9 @@ class Board(object):
                 empty_cells.append((row_index, col_index))
         return empty_cells
 
+    def reset_cells(self):
+        self.cells = [[self.blank]*3 for _ in range(3)]
+
     def is_full(self):
         result = False
         if self.blank not in self.cells:
@@ -65,9 +69,9 @@ class Board(object):
     def gameover(self): 
         result = False
         for combo in self.__win_combos:
-            cell_0 = check_cell(combo[0])
-            cell_1 = check_cell(combo[1])
-            cell_2 = check_cell(combo[2])
+            cell_0 = self.check_cell(combo[0])
+            cell_1 = self.check_cell(combo[1])
+            cell_2 = self.check_cell(combo[2])
             if cell_0 == cell_1 == cell_2 and cell_0 != self.blank:
                 result = True
                 if cell_0 == self.p1:
