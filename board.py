@@ -29,12 +29,12 @@ class Board(object):
         #self.__full = full
         #self.__state = state
         #self.__won = False
-        self.__p1 = p1_marker
-        self.__p2 = p2_marker
-        self.__blank = blank_marker
+        self.p1 = p1_marker
+        self.p2 = p2_marker
+        self.blank = blank_marker
         self.__win_combos = win_combos
-        self.__winner = winner
-        self.cells = [[self.__blank]*3 for _ in range(3)]
+        self.winner = winner
+        self.cells = [[self.blank]*3 for _ in range(3)]
         
     def print_cells(self):
         space = ' '
@@ -43,7 +43,7 @@ class Board(object):
                 print cell + space*2,
             print '\n'
 
-    def update_cell(self, marker, (x, y)):
+    def update_cell(self, (x, y), marker):
         self.cells[x][y] = marker
 
     def check_cell(self, (x, y)):
@@ -58,7 +58,7 @@ class Board(object):
 
     def is_full(self):
         result = False
-        if blank not in self.cells:
+        if self.blank not in self.cells:
             result = True
         return result
 
@@ -68,16 +68,16 @@ class Board(object):
             cell_0 = check_cell(combo[0])
             cell_1 = check_cell(combo[1])
             cell_2 = check_cell(combo[2])
-            if cell_0 == cell_1 == cell_2 and cell_0 != self.__blank:
+            if cell_0 == cell_1 == cell_2 and cell_0 != self.blank:
                 result = True
-                if cell_0 == self.__p1:
-                    self.__winner = self.__p1
+                if cell_0 == self.p1:
+                    self.winner = self.p1
                 else:
-                    self.__winner = self.__p2
+                    self.winner = self.p2
                 break
-        if self.__blank not in cells:
+        if self.is_full():
             result = True
-            self.__winner = self.__blank
+            self.winner = self.blank
         return result
 
 """
