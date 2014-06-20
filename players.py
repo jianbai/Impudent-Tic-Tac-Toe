@@ -25,11 +25,11 @@ class Human(Player):
 
     def get_human_move(self, board):
         while True:
-            move = raw_input("Input your move in (x,y) coordinates:")
             try:
+                move = eval(raw_input("Input your move in (x,y) coordinates:"))
                 type(move) == tuple and len(move) == 2
             except:
-                move = (4, 4)
+                move = (3, 3)
 
             if move in board.get_empty_cells():
                 break
@@ -87,4 +87,4 @@ class CPU(Player):
                 best_moves = [cell]
             elif val == best_score:
                 best_moves.append(cell)
-        return random.choice(moves)
+        return random.choice(best_moves)

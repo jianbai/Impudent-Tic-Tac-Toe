@@ -33,7 +33,7 @@ class Board(object):
         self.p1 = p1_marker
         self.p2 = p2_marker
         self.blank = blank_marker
-        self.__win_combos = win_combos
+        self.win_combos = win_combos
         self.winner = winner
         self.cells = [[self.blank]*3 for _ in range(3)]
         
@@ -61,14 +61,16 @@ class Board(object):
         self.cells = [[self.blank]*3 for _ in range(3)]
 
     def is_full(self):
-        result = False
-        if self.blank not in self.cells:
-            result = True
+        result = True
+        for row in self.cells:
+            for cell in row:
+                if cell == self.blank:
+                    result = False
         return result
 
     def gameover(self): 
         result = False
-        for combo in self.__win_combos:
+        for combo in self.win_combos:
             cell_0 = self.check_cell(combo[0])
             cell_1 = self.check_cell(combo[1])
             cell_2 = self.check_cell(combo[2])

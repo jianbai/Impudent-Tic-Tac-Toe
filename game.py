@@ -15,22 +15,30 @@ class Game(object):
         print_instructions()
 
         if human_goes_first():
-            while not board.gameover():
-                player1.move(board, get_human_move(board), player1.marker)
+            board.print_cells()
+            while board.gameover():
+                player1.move(board, player1.get_human_move(board), player1.marker)
+                board.print_cells()
                 CPU_response()
-                player2.move(board, get_CPU_move(board), player2.marker)
+                player2.move(board, player2.get_CPU_move(board, board.p2), player2.marker)
+                board.print_cells()
             else:
-                end_message()
+                end_message(board)
         else:
             while not board.gameover():
-                player2.move(board, get_CPU_move(board), player2.marker)
-                player1.move(board, get_human_move(board), player1.marker)
+                player2.move(board, player2.get_CPU_move(board, board.p2), player2.marker)
+                board.print_cells()
+                player1.move(board, player1.get_human_move(board), player1.marker)
+                board.print_cells()
                 CPU_response()
             else:
-                end_message()
+                end_message(board)
 
 if __name__ == '__main__':
     board = Board()
+
+
+
     human = Human()
     cpu = CPU()
     game = Game()
