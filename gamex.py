@@ -56,7 +56,8 @@ class Board(object):
         empty_cells = []
         for row_index, row in enumerate(self.cells):
             for col_index, col in enumerate(row):
-                empty_cells.append((row_index, col_index))
+                if self.cells[row_index][col_index] == self.blank:
+                    empty_cells.append((row_index, col_index))
         return empty_cells
 
     def reset_cells(self):
@@ -257,11 +258,13 @@ if __name__ == '__main__':
     
     if human_goes_first():
         board.print_cells()
-        while not board.gameover():
-            human.move(board, human.get_human_move(board), board.p1)
-            board.print_cells()
-        else:
-            end_message(board)
+        print board.get_empty_cells()
+        human.move(board, human.get_human_move(board), board.p1)
+        board.print_cells()
+        print board.get_empty_cells()
+        human.move(board, human.get_human_move(board), board.p1)
+        board.print_cells()
+        print board.get_empty_cells()
         
     else:
         print "poop"

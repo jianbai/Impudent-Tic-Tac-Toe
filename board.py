@@ -54,7 +54,8 @@ class Board(object):
         empty_cells = []
         for row_index, row in enumerate(self.cells):
             for col_index, col in enumerate(row):
-                empty_cells.append((row_index, col_index))
+                if self.cells[row_index][col_index] == self.blank:
+                    empty_cells.append((row_index, col_index))
         return empty_cells
 
     def reset_cells(self):
