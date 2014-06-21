@@ -76,6 +76,8 @@ class CPU(Player):
 
     def get_CPU_move(self, board, marker):
         possible_moves = board.get_empty_cells()
+        if len(possible_moves) == 9:
+            return (0,2)
         best_moves = []
         best_score = None
         for cell in possible_moves:

@@ -131,30 +131,31 @@ class CPU(Player):
         self.marker = marker
 
     def opposite_marker(self, board, marker):
-        if marker == board.p1:
-            return board.p2
+        if marker == 'X':
+            return 'O'
         else:
-            return board.p1
+            return 'X'
 
     def minimax(self, board, marker):
         if board.gameover():
-            if board.winner == board.p1:
+            if board.winner == 'X':
                 return -1
-            elif board.winner == board.blank:
+            elif board.winner == '-':
                 return 0
-            elif board.winner == board.p2:
+            elif board.winner == 'O':
                 return 1
         else:
             possible_moves = board.get_empty_cells()
-            best_score = None
             for cell in possible_moves:
-                board.update_cell(cell, board.p2)
+                board.update_cell(cell, marker)
                 val = self.minimax(board, self.opposite_marker(board, marker))
                 board.update_cell(cell, board.blank)
-                if marker == board.p2:
+                if marker == 'O':
+                    best_score = -1
                     if val > best_score:
                         best_score = val
-                elif marker == board.p1:
+                elif marker == 'X':
+                    best_score = 1
                     if val < best_score:
                         best_score = val
                 return best_score
@@ -162,7 +163,7 @@ class CPU(Player):
     def get_CPU_move(self, board, marker):
         possible_moves = board.get_empty_cells()
         best_moves = []
-        best_score = None
+        best_score = -2
         for cell in possible_moves:
             board.update_cell(cell, marker)
             val = self.minimax(board, self.opposite_marker(board, marker))
@@ -256,18 +257,20 @@ if __name__ == '__main__':
     cpu = CPU()
     game = Game()
     
-    if human_goes_first():
-        board.print_cells()
-        print board.get_empty_cells()
-        human.move(board, human.get_human_move(board), board.p1)
-        board.print_cells()
-        print board.get_empty_cells()
-        human.move(board, human.get_human_move(board), board.p1)
-        board.print_cells()
-        print board.get_empty_cells()
-        
-    else:
-        print "poop"
+    #board.print_cells()
+    board.print_cells()
+    board.update_cell((0,0), 'X')
+    board.print_cells()
+    board.update_cell((0,1), 'X')
+    board.print_cells()
+    board.update_cell((0,2), 'X')
+    board.print_cells()
+
+    print board.winner
+
+
+    #cpu.move(board, cpumove, board.p2)
+    #print board.cells
 
 
 

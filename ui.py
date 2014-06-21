@@ -45,5 +45,5 @@ def end_message(board):
     elif board.winner == board.blank:
         draw_message()
     elif board.winner == board.p2:
-        lose_message
+        lose_message()
     restart_message()
