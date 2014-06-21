@@ -5,7 +5,7 @@ import random
 from board import Board
 
 def print_instructions():
-    print "CPU: Welcome to Tic Tac Toe! Our board has 3 rows and 3 columns, each numbered 0, 1, and 2. To play, input your moves as (x,y) coordinates. Don't forget the parentheses!"
+    print "CPU: Welcome to Tic Tac Toe! Our board has 3 rows and 3 columns, each numbered 0, 1, and 2. To play, input your moves as (x,y) coordinates."
 
 def human_goes_first():
     while True:
@@ -22,6 +22,9 @@ def human_goes_first():
         return True
     elif human_first.lower() == 'n':
         return False
+
+def CPU_goes_first():
+    print "CPU: What a gentleman!"
 
 def CPU_response():
     responses = ["Touché", "Well played", "Hmmm...", "A worthy opponent, you are", "Let's see here... Aha!", "Shrewd move", "Ah, yes...", "I think I see where you're going", "You can't fool me!", "Do you take me for a simpleton?", "Carefully considered", "Delightful!", "Very clever", "It seems I have found a truly formidable challenger!", "A wise decision", "A cunning play", "Your tactics are crafty", "A deft maneuver", "I can see you are quite sharp", "Finally, a worthy foe!", "You are clearly a diligent student of the game... I can respect that", "Astute", "Careful now!", "Keep your guard up", "Remain ever vigilant!", "Ah, the thrill of combat! I live for this!", "For each of your thrusts, I shall parry! Will you survive my counterattack?", "Ah, the beauty of the game!", "For every action, there must be reaction", "Back and forth until the end of time!", "I was born for this struggle", "Alas, is there no end?", "Though our game must end, I shall remember you"]
@@ -47,3 +50,19 @@ def end_message(board):
     elif board.winner == board.p2:
         lose_message()
     restart_message()
+
+def play_again():
+    again = raw_input("CPU: Would you like to play another game? [y/n]:")
+    while True:
+        try:
+            again.lower() == 'y' or again.lower() == 'n'
+        except:
+            again = 'x'
+        if again.lower() == 'y' or again.lower() == 'n':
+            break
+        else:
+            print "CPU: I didn't catch that. Make sure you enter 'y' or 'n'!"
+    if again.lower() == 'y':
+        return True
+    elif again.lower() == 'n':
+        return False

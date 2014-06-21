@@ -10,6 +10,14 @@ class Game(object):
     def __init__(self):
         pass
 
+    def human_move(self, board, human):
+        human.move(board, human.get_human_move(board), human.marker)
+        board.print_cells()
+
+    def CPU_move(self, board, cpu):
+        cpu.move(board, cpu.get_CPU_move(board), cpu.marker)
+        board.print_cells()
+
     def play(self, board, player1, player2):
         
         print_instructions()
@@ -17,35 +25,41 @@ class Game(object):
         if human_goes_first():
             board.print_cells()
             while True:
-                player1.move(board, player1.get_human_move(board), player1.marker)
-                board.print_cells()
+                self.human_move(board, player1)
                 if board.gameover():
                     end_message(board)
                     break
                 CPU_response()
-                player2.move(board, player2.get_CPU_move(board, board.p2), player2.marker)
-                board.print_cells()
+                self.CPU_move(board, player2)
                 if board.gameover():
                     end_message(board)
                     break
         else:
             while True:
-                player2.move(board, player2.get_CPU_move(board, board.p2), player2.marker)
-                board.print_cells()
+                self.CPU_move(board, player2)
                 if board.gameover():
                     end_message(board)
                     break
-                player1.move(board, player1.get_human_move(board), player1.marker)
-                board.print_cells()
+                self.human_move(board,player1)
                 if board.gameover():
                     end_message(board)
                     break
                 CPU_response()
 
 if __name__ == '__main__':
-    board = Board()
-    human = Human()
-    cpu = CPU()
-    game = Game()
 
-    game.play(board, human, cpu)
+    looping = True
+
+    while looping:
+        board = Board()
+        human = Human()
+        cpu = CPU()
+        game = Game()
+
+        game.play(board, human, cpu)
+        
+        if not play_again():
+            break
+
+
+

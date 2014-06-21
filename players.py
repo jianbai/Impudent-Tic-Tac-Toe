@@ -45,44 +45,47 @@ class CPU(Player):
     def __init__(self, marker='O'):
         self.marker = marker
 
-    def opposite_marker(self, board, marker):
-        if marker == board.p1:
-            return board.p2
+    def score(self, board):
+        if board.winner == board.p2:
+            return 1
+        elif board.winner == board.p1:
+            return -1
         else:
-            return board.p1
+            return 0
+
+    def opposite_marker(self, marker):
+        if marker == 'X':
+            return 'O'
+        else:
+            return 'X'
 
     def minimax(self, board, marker):
         if board.gameover():
-            if board.winner == board.p1:
-                return -1
-            elif board.winner == board.blank:
-                return 0
-            elif board.winner == board.p2:
-                return 1
+            return self.score(board)
         else:
-            possible_moves = board.get_empty_cells()
-            best_score = None
-            for cell in possible_moves:
-                board.update_cell(cell, board.p2)
-                val = self.minimax(board, self.opposite_marker(board, marker))
+            max_score = -1
+            min_score = 1
+            for cell in board.get_empty_cells():
+                board.update_cell(cell, marker)
+                val = self.minimax(board, self.opposite_marker(marker))
                 board.update_cell(cell, board.blank)
                 if marker == board.p2:
-                    if val > best_score:
-                        best_score = val
+                    if val > max_score:
+                        max_score = val
                 elif marker == board.p1:
-                    if val < best_score:
-                        best_score = val
-                return best_score
+                    if val < min_score:
+                        min_score = val
+            if marker == board.p2:
+                return max_score
+            if marker == board.p1:
+                return min_score
 
-    def get_CPU_move(self, board, marker):
-        possible_moves = board.get_empty_cells()
-        if len(possible_moves) == 9:
-            return (0,2)
+    def get_CPU_move(self, board):
         best_moves = []
-        best_score = None
-        for cell in possible_moves:
-            board.update_cell(cell, marker)
-            val = self.minimax(board, self.opposite_marker(board, marker))
+        best_score = 0
+        for cell in board.get_empty_cells():
+            board.update_cell(cell, board.p2)
+            val = self.minimax(board, board.p1)
             board.update_cell(cell, board.blank)
             if val > best_score:
                 best_score = val
