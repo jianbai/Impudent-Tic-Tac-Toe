@@ -20,37 +20,35 @@ class Game(object):
 
     def play(self, board, player1, player2):
         
-        print_instructions()
+        print_instructions(board)
 
         if human_goes_first():
             board.print_cells()
             while True:
                 self.human_move(board, player1)
                 if board.gameover():
-                    end_message(board)
+                    gameover_message(board)
                     break
                 CPU_response()
                 self.CPU_move(board, player2)
                 if board.gameover():
-                    end_message(board)
+                    gameover_message(board)
                     break
         else:
             while True:
                 self.CPU_move(board, player2)
                 if board.gameover():
-                    end_message(board)
+                    gameover_message(board)
                     break
                 self.human_move(board,player1)
                 if board.gameover():
-                    end_message(board)
+                    gameover_message(board)
                     break
                 CPU_response()
 
 if __name__ == '__main__':
 
-    looping = True
-
-    while looping:
+    while True:
         board = Board()
         human = Human()
         cpu = CPU()
@@ -59,6 +57,7 @@ if __name__ == '__main__':
         game.play(board, human, cpu)
         
         if not play_again():
+            end_message()
             break
 
 

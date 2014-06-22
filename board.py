@@ -34,6 +34,7 @@ class Board(object):
         
     def print_cells(self):
         space = ' '
+        print '\n'
         for row in self.cells:
             for cell in row:
                 print cell + space*2,

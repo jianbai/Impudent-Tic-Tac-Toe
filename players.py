@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import random
-import board
 
 class Player(object):
     """
@@ -20,7 +19,9 @@ class Human(Player):
     Human Player Class
     """
     
-    def __init__(self, marker='X'):
+    MARKER = 'X'
+
+    def __init__(self, marker=MARKER):
         self.marker = marker
 
     def get_human_move(self, board):
@@ -42,7 +43,9 @@ class CPU(Player):
     CPU Player Class
     """
 
-    def __init__(self, marker='O'):
+    MARKER = 'O'
+
+    def __init__(self, marker=MARKER):
         self.marker = marker
 
     def score(self, board):
