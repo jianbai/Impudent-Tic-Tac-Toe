@@ -12,7 +12,7 @@ from ui import *
 
 class Game(object):
     """
-    A Game
+    A Tic Tac Toe game between a human player and a CPU player
     """
     
     def __init__(self):
