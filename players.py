@@ -83,6 +83,8 @@ class CPU(Player):
     def get_CPU_move(self, board):
         best_moves = []
         best_score = 0
+        if board.is_empty():
+            return random.choice(board.get_empty_cells())
         for cell in board.get_empty_cells():
             board.update_cell(cell, board.p2)
             val = self.minimax(board, board.p1)

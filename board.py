@@ -53,8 +53,13 @@ class Board(object):
                     empty_cells.append((row_index, col_index))
         return empty_cells
 
-    def reset_cells(self):
-        self.cells = [[self.blank]*3 for _ in range(3)]
+    def is_empty(self):
+        result = True
+        for row in self.cells:
+            for cell in row:
+                if cell != self.blank:
+                    result = False
+        return result
 
     def is_full(self):
         result = True
