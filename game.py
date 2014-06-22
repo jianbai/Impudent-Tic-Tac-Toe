@@ -1,10 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""
-
-"""
-
 from board import *
 from players import *
 from ui import *

@@ -116,8 +116,8 @@ def play_again():
     Produces: nothing
     Purpose: return True if the human player chooses to play again, otherwise return False
     """    
-    again = raw_input("CPU: Would you like to play another game? [y/n]:")
     while True:
+        again = raw_input("CPU: Would you like to play another game? [y/n]:")
         try:
             again.lower() == 'y' or again.lower() == 'n'
         except:
