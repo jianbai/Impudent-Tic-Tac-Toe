@@ -25,5 +25,14 @@ Currently, the CPU populates an array with the best moves available to it and th
 Some of the high level functions have 3 or 4 levels of nested callbacks, and it’s likely that this is not really necessary. I could be possible to streamline the classes further to cut some of the intermediate functions out.
 
 4. Implementing a GUI
-
 5. Alpha Beta Pruning
+
+
+
+
+
+
+
+
+
+
