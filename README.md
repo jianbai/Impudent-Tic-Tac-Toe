@@ -3,16 +3,14 @@ Tic Tac Toe
 ========
 
 To run
-——————
+--------
 
 Navigate to the TTT folder in the terminal and then run game.py:
-
-.. code-block::
 
 	python game.py
 
 Hopes and dreams for the future
-——————
+--------
 
 1) Move input mechanism
 
