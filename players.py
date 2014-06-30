@@ -4,24 +4,8 @@
 import random
 import sys
 
-class Player(object):
-    """
-    General Player Class
-    """
 
-    def __init__(self, marker):
-        self.marker = marker
-
-    def move(self, board, cell, marker):
-        """
-        Consumes: a Board object, a tuple, and a string
-        Produces: nothing
-        Purpose: change the given cell in the given Board to the given marker
-        """
-        board.update_cell(cell, marker)
-
-
-class Human(Player):
+class Human(object):
     """
     Human Player Class
     """
@@ -55,7 +39,7 @@ class Human(Player):
         return move
 
 
-class CPU(Player):
+class CPU(object):
     """
     CPU Player Class
     """

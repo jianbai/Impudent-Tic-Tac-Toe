@@ -14,6 +14,14 @@ class Game(object):
     def __init__(self):
         pass
 
+    def move(self, board, cell, marker):
+        """
+        Consumes: a Board object, a tuple, and a string
+        Produces: nothing
+        Purpose: change the given cell in the given Board to the given marker
+        """
+        board.update_cell(cell, marker)
+
     def human_move(self, board, human):
         """
         Consumes: a Board object and a Human Player object
