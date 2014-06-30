@@ -48,7 +48,6 @@ class Human(Player):
                 type(move) == tuple and len(move) == 2
             except KeyboardInterrupt:
                 sys.exit()
-
             if move in board.get_empty_cells():
                 break
             else:

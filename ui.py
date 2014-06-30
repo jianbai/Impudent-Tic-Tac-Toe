@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import sys
 
 
 def print_instructions(board):
@@ -25,11 +26,11 @@ def human_goes_first():
     Purpose: return True if the human player chooses to go first, otherwise return False
     """    
     while True:
-        human_first = raw_input("CPU: Would you like to go first? [y/n]:")
+        human_first = raw_input("CPU: Would you like to go first? [y/n]: ")
         try:
             human_first.lower() == 'y' or human_first.lower() == 'n'
-        except:
-            human_first = 'x'
+        except KeyboardInterrupt:
+            sys.exit()
         if human_first.lower() == 'y' or human_first.lower() == 'n':
             break
         else:
@@ -117,11 +118,11 @@ def play_again():
     Purpose: return True if the human player chooses to play again, otherwise return False
     """    
     while True:
-        again = raw_input("CPU: Would you like to play another game? [y/n]:")
+        again = raw_input("CPU: Would you like to play another game? [y/n]: ")
         try:
             again.lower() == 'y' or again.lower() == 'n'
-        except:
-            again = 'x'
+        except KeyboardInterrupt:
+            sys.exit()
         if again.lower() == 'y' or again.lower() == 'n':
             break
         else:
