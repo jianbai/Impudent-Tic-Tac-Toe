@@ -14,30 +14,13 @@ class Game(object):
     def __init__(self):
         pass
 
-    def move(self, board, cell, marker):
+    def move(self, board, player):
         """
         Consumes: a Board object, a tuple, and a string
         Produces: nothing
         Purpose: change the given cell in the given Board to the given marker
         """
-        board.update_cell(cell, marker)
-
-    def human_move(self, board, human):
-        """
-        Consumes: a Board object and a Human Player object
-        Produces: nothing
-        Purpose: ask the human player for a move, execute that move and reprint the updated board
-        """        
-        human.move(board, human.get_human_move(board), human.marker)
-        print_cells(board)
-
-    def CPU_move(self, board, cpu):
-        """
-        Consumes: a Board object and a CPU Player object
-        Produces: nothing
-        Purpose: get a minimax() optimized move, execute that move and reprint the updated board
-        """        
-        cpu.move(board, cpu.get_CPU_move(board), cpu.marker)
+        board.update_cell(player.get_move(board), player.marker)
         print_cells(board)
 
     def play(self, board, human, cpu):
@@ -50,22 +33,22 @@ class Game(object):
         if human_goes_first():
             print_cells(board)
             while True:
-                self.human_move(board, human)
+                self.move(board, human)
                 if board.gameover():
                     gameover_message(board)
                     break
                 CPU_response()
-                self.CPU_move(board, cpu)
+                self.move(board, cpu)
                 if board.gameover():
                     gameover_message(board)
                     break
         else:
             while True:
-                self.CPU_move(board, cpu)
+                self.move(board, cpu)
                 if board.gameover():
                     gameover_message(board)
                     break
-                self.human_move(board,human)
+                self.move(board,human)
                 if board.gameover():
                     gameover_message(board)
                     break

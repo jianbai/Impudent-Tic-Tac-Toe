@@ -15,7 +15,7 @@ class Human(object):
     def __init__(self, marker=MARKER):
         self.marker = marker
 
-    def get_human_move(self, board):
+    def get_move(self, board):
         """
         Consumes: a Board object
         Produces: a tuple
@@ -99,7 +99,7 @@ class CPU(object):
             if marker == board.p1:
                 return min_score
 
-    def get_CPU_move(self, board):
+    def get_move(self, board):
         """
         Consumes: a Board object
         Produces: a tuple
