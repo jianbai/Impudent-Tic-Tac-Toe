@@ -58,7 +58,6 @@ class Game(object):
 
 
 if __name__ == '__main__':
-
     while True:
         #Instantiate a Board object
         board = Board()
@@ -74,6 +73,3 @@ if __name__ == '__main__':
         if not play_again():
             end_message()
             break
-
-
-
