@@ -21,7 +21,7 @@ class Game(object):
         Purpose: ask the human player for a move, execute that move and reprint the updated board
         """        
         human.move(board, human.get_human_move(board), human.marker)
-        board.print_cells()
+        print_cells(board)
 
     def CPU_move(self, board, cpu):
         """
@@ -30,7 +30,7 @@ class Game(object):
         Purpose: get a minimax() optimized move, execute that move and reprint the updated board
         """        
         cpu.move(board, cpu.get_CPU_move(board), cpu.marker)
-        board.print_cells()
+        print_cells(board)
 
     def play(self, board, human, cpu):
         """
@@ -40,7 +40,7 @@ class Game(object):
         """        
         print_instructions(board)
         if human_goes_first():
-            board.print_cells()
+            print_cells(board)
             while True:
                 self.human_move(board, human)
                 if board.gameover():

@@ -35,19 +35,6 @@ class Board(object):
         self.win_combos = win_combos
         self.winner = None
         self.cells = [[self.blank]*3 for _ in range(3)]
-        
-    def print_cells(self):
-        """
-        Consumes: nothing
-        Produces: nothing
-        Purpose: print out all current cells in the board
-        """
-        space = ' '
-        print '\n'
-        for row in self.cells:
-            for cell in row:
-                print cell + space*2,
-            print '\n'
 
     def update_cell(self, (x, y), marker):
         """

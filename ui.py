@@ -18,6 +18,20 @@ def print_instructions(board):
             print '(' + str(row_index) + ',' + str(col_index) + ')',
         print '\n'
 
+        
+def print_cells(board):
+    """
+    Consumes: a Board object
+    Produces: nothing
+    Purpose: print out all current cells in the board
+    """
+    space = ' '
+    print '\n'
+    for row in board.cells:
+        for cell in row:
+            print cell + space*2,
+        print '\n'
+
 
 def human_goes_first():
     """
