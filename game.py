@@ -11,46 +11,48 @@ class Game(object):
     A Tic Tac Toe game between a human player and a CPU player
     """
     
-    def __init__(self):
-        pass
+    def __init__(self, board, human, cpu):
+        self.board = board
+        self.human = human
+        self.cpu = cpu
 
-    def move(self, board, player):
+    def move(self, player):
         """
-        Consumes: a Board object, a tuple, and a string
+        Consumes: a Player object
         Produces: nothing
         Purpose: change the given cell in the given Board to the given marker
         """
-        board.update_cell(player.get_move(board), player.marker)
-        print_cells(board)
+        self.board.update_cell(player.get_move(), player.marker)
+        print_cells(self.board)
 
-    def play(self, board, human, cpu):
+    def play(self):
         """
-        Consumes: a Board object, a Human Player object, and a CPU Player object
+        Consumes: nothing
         Produces: nothing
         Purpose: run the game loop until the game is over
         """        
-        print_instructions(board)
+        print_instructions(self.board)
         if human_goes_first():
-            print_cells(board)
+            print_cells(self.board)
             while True:
-                self.move(board, human)
-                if board.gameover():
-                    gameover_message(board)
+                self.move(self.human)
+                if self.board.gameover():
+                    gameover_message(self.board)
                     break
                 CPU_response()
-                self.move(board, cpu)
-                if board.gameover():
-                    gameover_message(board)
+                self.move(self.cpu)
+                if self.board.gameover():
+                    gameover_message(self.board)
                     break
         else:
             while True:
-                self.move(board, cpu)
-                if board.gameover():
-                    gameover_message(board)
+                self.move(self.cpu)
+                if self.board.gameover():
+                    gameover_message(self.board)
                     break
-                self.move(board,human)
-                if board.gameover():
-                    gameover_message(board)
+                self.move(self.human)
+                if self.board.gameover():
+                    gameover_message(self.board)
                     break
                 CPU_response()
 
@@ -61,13 +63,13 @@ if __name__ == '__main__':
         #Instantiate a Board object
         board = Board()
         #Instantiate a Human Player object
-        human = Human()
+        human = Human(board)
         #Instantiate a CPU Player object
-        cpu = CPU()
+        cpu = CPU(board)
         #Instantiate a Game object
-        game = Game()
+        game = Game(board, human, cpu)
         #Run game loop
-        game.play(board, human, cpu)
+        game.play()
         #Rerun game loop as long as the human player chooses to play again
         if not play_again():
             end_message()
