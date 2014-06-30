@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import random
-
+import sys
 
 class Player(object):
     """
@@ -39,10 +39,15 @@ class Human(Player):
         """        
         while True:
             try:
-                move = eval(raw_input("Input your move in (x,y) coordinates:"))
+                move = ()
+                string = raw_input("Input your move in (x,y) coordinates: ")
+                chars = list(string)
+                for char in chars:
+                    if char.isdigit():
+                        move = move + (int(char),)
                 type(move) == tuple and len(move) == 2
-            except:
-                move = (3, 3)
+            except KeyboardInterrupt:
+                sys.exit()
 
             if move in board.get_empty_cells():
                 break
