@@ -12,10 +12,6 @@ Navigate to the TTT folder in the terminal and then run game.py:
 Hopes and dreams for the future
 --------
 
-* Include tests
-
-	This game was written without tests, which left me debugging for as long as it took me to code the program, without any idea how many bugs were left or if I was creating new ones.
-
 * Move input mechanism
 
 	In order to input a move, the human player has to input a tuple with index values for the board, which is a multi-directional array. This isn’t the most intuitive method, and it would be nice if the human could just input a single key press to make a move, instead of entering coordinate values and then hitting enter.
